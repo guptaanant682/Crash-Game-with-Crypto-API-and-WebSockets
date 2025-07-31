@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install)",
+      "Bash(mkdir:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(npm run seed:*)",
+      "Bash(pkill:*)",
+      "Bash(true)",
+      "Bash(curl:*)"
+    ],
+    "deny": []
+  }
+}

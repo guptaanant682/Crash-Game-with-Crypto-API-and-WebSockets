@@ -1,0 +1,677 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-123456789012",
+		"name": "Crypto Crash Game API",
+		"description": "Complete API collection for testing the Crypto Crash game backend endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health & Status",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/health",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"health"
+							]
+						},
+						"description": "Check server health and status"
+					}
+				},
+				{
+					"name": "API Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api"
+							]
+						},
+						"description": "Get API information and available endpoints"
+					}
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register Player",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"TestPlayer\",\n  \"email\": \"testplayer@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						},
+						"description": "Register a new player account"
+					}
+				},
+				{
+					"name": "Login Player",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"Player1\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login with username or email"
+					}
+				},
+				{
+					"name": "Get Player Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/auth/profile/{{player_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"profile",
+								"{{player_id}}"
+							]
+						},
+						"description": "Get player profile information"
+					}
+				},
+				{
+					"name": "Get Players Leaderboard",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/auth/players?limit=10&sortBy=netProfit&sortOrder=desc",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"players"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "sortBy",
+									"value": "netProfit"
+								},
+								{
+									"key": "sortOrder",
+									"value": "desc"
+								}
+							]
+						},
+						"description": "Get leaderboard of players"
+					}
+				}
+			]
+		},
+		{
+			"name": "Game",
+			"item": [
+				{
+					"name": "Get Game State",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/game/state",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"game",
+								"state"
+							]
+						},
+						"description": "Get current game state and round information"
+					}
+				},
+				{
+					"name": "Place Bet",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"playerId\": \"{{player_id}}\",\n  \"username\": \"Player1\",\n  \"usdAmount\": 10,\n  \"currency\": \"bitcoin\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/game/bet",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"game",
+								"bet"
+							]
+						},
+						"description": "Place a bet in the current round"
+					}
+				},
+				{
+					"name": "Cash Out",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"playerId\": \"{{player_id}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/game/cashout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"game",
+								"cashout"
+							]
+						},
+						"description": "Cash out during an active round"
+					}
+				},
+				{
+					"name": "Get Round History",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/game/history?limit=10&offset=0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"game",
+								"history"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						},
+						"description": "Get history of completed rounds"
+					}
+				},
+				{
+					"name": "Get Specific Round",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/game/round/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"game",
+								"round",
+								"1"
+							]
+						},
+						"description": "Get details of a specific round"
+					}
+				},
+				{
+					"name": "Get Game Statistics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/game/stats",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"game",
+								"stats"
+							]
+						},
+						"description": "Get overall game statistics"
+					}
+				},
+				{
+					"name": "Verify Round Fairness",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"seed\": \"example_seed_here\",\n  \"roundId\": 1,\n  \"crashPoint\": 2.45\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/game/verify-fairness",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"game",
+								"verify-fairness"
+							]
+						},
+						"description": "Verify the fairness of a completed round"
+					}
+				},
+				{
+					"name": "Get Fairness Proof",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/game/fairness-proof/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"game",
+								"fairness-proof",
+								"1"
+							]
+						},
+						"description": "Get fairness proof for a specific round"
+					}
+				},
+				{
+					"name": "Get Player Game History",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/game/player-history/{{player_id}}?limit=5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"game",
+								"player-history",
+								"{{player_id}}"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						},
+						"description": "Get game history for a specific player"
+					}
+				},
+				{
+					"name": "Get Crash Statistics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/game/crash-stats?days=7",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"game",
+								"crash-stats"
+							],
+							"query": [
+								{
+									"key": "days",
+									"value": "7"
+								}
+							]
+						},
+						"description": "Get crash point statistics"
+					}
+				}
+			]
+		},
+		{
+			"name": "Wallet",
+			"item": [
+				{
+					"name": "Get Wallet Balance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/wallet/balance/{{player_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"wallet",
+								"balance",
+								"{{player_id}}"
+							]
+						},
+						"description": "Get player wallet balance in crypto and USD equivalent"
+					}
+				},
+				{
+					"name": "Process Deposit",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"playerId\": \"{{player_id}}\",\n  \"usdAmount\": 100,\n  \"currency\": \"bitcoin\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/wallet/deposit",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"wallet",
+								"deposit"
+							]
+						},
+						"description": "Process a deposit to player wallet"
+					}
+				},
+				{
+					"name": "Check Balance Sufficient",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"playerId\": \"{{player_id}}\",\n  \"usdAmount\": 10,\n  \"currency\": \"bitcoin\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/wallet/check-balance",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"wallet",
+								"check-balance"
+							]
+						},
+						"description": "Check if player has sufficient balance for a bet"
+					}
+				},
+				{
+					"name": "Get Transaction History",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/wallet/transactions/{{player_id}}?limit=10&type=bet",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"wallet",
+								"transactions",
+								"{{player_id}}"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "type",
+									"value": "bet"
+								}
+							]
+						},
+						"description": "Get player transaction history"
+					}
+				},
+				{
+					"name": "Get Wallet Statistics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/wallet/stats/{{player_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"wallet",
+								"stats",
+								"{{player_id}}"
+							]
+						},
+						"description": "Get wallet statistics for a player"
+					}
+				},
+				{
+					"name": "Get Current Crypto Prices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/wallet/prices",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"wallet",
+								"prices"
+							]
+						},
+						"description": "Get current cryptocurrency prices"
+					}
+				},
+				{
+					"name": "Convert USD to Crypto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"usdAmount\": 100,\n  \"currency\": \"bitcoin\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/wallet/convert/usd-to-crypto",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"wallet",
+								"convert",
+								"usd-to-crypto"
+							]
+						},
+						"description": "Convert USD amount to cryptocurrency"
+					}
+				},
+				{
+					"name": "Convert Crypto to USD",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cryptoAmount\": 0.001,\n  \"currency\": \"bitcoin\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/wallet/convert/crypto-to-usd",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"wallet",
+								"convert",
+								"crypto-to-usd"
+							]
+						},
+						"description": "Convert cryptocurrency amount to USD"
+					}
+				},
+				{
+					"name": "Get Historical Prices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/wallet/prices/history/bitcoin?days=7",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"wallet",
+								"prices",
+								"history",
+								"bitcoin"
+							],
+							"query": [
+								{
+									"key": "days",
+									"value": "7"
+								}
+							]
+						},
+						"description": "Get historical cryptocurrency prices"
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "player_id",
+			"value": "YOUR_PLAYER_ID_HERE",
+			"type": "string"
+		}
+	]
+}
